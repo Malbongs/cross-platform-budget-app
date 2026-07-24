@@ -1,6 +1,6 @@
 # 크로스플랫폼 가계부 앱
 
-> Log a purchase, and a mascot reacts. A cross-platform gamification budget app built from a single codebase — Web, iOS, and Android.
+> 소비를 기록하면 마스코트가 반응하는 게이미피케이션 가계부 앱 — 하나의 코드베이스로 웹·iOS·안드로이드에 배포했습니다.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
@@ -10,64 +10,64 @@
 ![Offline](https://img.shields.io/badge/Offline-First-success)
 ![Solo Dev](https://img.shields.io/badge/Solo-Developer-orange)
 
-## Overview
+## 개요
 
-A cross-platform budget tracker with a gamification twist: every time you record spending, a mascot character reacts. I built it solo, shipping one codebase to three platforms — a live web app, iOS, and Android. It runs fully offline with no account and no server, so nothing ever leaves the device.
+소비를 기록할 때마다 마스코트 캐릭터가 반응하는 게이미피케이션 가계부 앱입니다. 혼자서 하나의 코드베이스로 세 플랫폼 — 실서비스 웹, iOS, 안드로이드 — 에 모두 배포했습니다. 서버도 계정도 없이 완전히 오프라인으로 동작해서, 데이터가 기기 밖으로 나가지 않습니다.
 
-## Key Features
+## 핵심 기능
 
-- **Mascot-driven gamification** — the character responds to your spending with 8 distinct facial expressions.
-- **Fully offline, no account** — all data lives on-device; privacy-friendly by design.
-- **Client-side PDF reports** — multi-page spending reports generated entirely in the browser, no server round-trip.
-- **System-level sharing** — export and share reports through the native OS share sheet.
-- **Trilingual** — full Korean / English / Japanese localization.
-- **One codebase, three platforms** — Web, iOS, and Android from a single source.
+- **마스코트 게이미피케이션** — 캐릭터가 소비 내역에 따라 8종의 서로 다른 표정으로 반응
+- **완전 오프라인, 계정 불필요** — 모든 데이터를 기기에 저장, 설계부터 프라이버시 친화적
+- **클라이언트 사이드 PDF 리포트** — 서버 왕복 없이 브라우저에서 멀티페이지 소비 리포트 생성
+- **시스템 공유** — OS 네이티브 공유 시트로 리포트 내보내기·공유
+- **3개국어** — 한국어 / 영어 / 일본어 완전 지원
+- **원 코드베이스, 3플랫폼** — 웹·iOS·안드로이드를 단일 소스로
 
-## Tech Stack
+## 기술 스택
 
-| Area | Technology |
+| 영역 | 기술 |
 |---|---|
 | UI | React 19, Vite 7 (ESM) |
-| Native wrapper | Capacitor 8 (iOS / Android) |
-| Native plugins | Preferences (local storage), Filesystem + Share (PDF system share), SplashScreen, StatusBar, AdMob |
-| PDF | jsPDF + html2canvas (client-side) |
-| Storage | localStorage / Capacitor Preferences (platform-branched) |
-| i18n | 3 locales (KO / EN / JA) |
-| Tooling | Puppeteer (screenshot automation), sharp (icon generation) |
-| Delivery | Web deploy + Android AAB build |
+| 네이티브 래핑 | Capacitor 8 (iOS / Android) |
+| 네이티브 플러그인 | Preferences(로컬 저장), Filesystem + Share(PDF 시스템 공유), SplashScreen, StatusBar, AdMob |
+| PDF | jsPDF + html2canvas (클라이언트 사이드) |
+| 저장소 | localStorage / Capacitor Preferences (플랫폼 분기) |
+| 다국어 | 3개 로케일 (KO / EN / JA) |
+| 툴링 | Puppeteer(스크린샷 자동화), sharp(아이콘 생성) |
+| 배포 | 웹 배포 + Android AAB 빌드 |
 
-## Architecture
+## 아키텍처
 
-A single React + Vite codebase serves as the source of truth. On the web it deploys straight to a CDN host; for mobile, Capacitor 8 wraps the same build into native iOS and Android shells.
+React + Vite 단일 코드베이스가 소스의 기준입니다. 웹은 CDN 호스트에 바로 배포하고, 모바일은 Capacitor 8이 같은 빌드를 네이티브 iOS·안드로이드 셸로 감쌉니다.
 
 ```
-React 19 + Vite 7 (single source)
+React 19 + Vite 7 (단일 소스)
         │
-        ├─► Web ──────────────► live web deploy
+        ├─► 웹 ──────────────► 실서비스 웹 배포
         │
-        └─► Capacitor 8 wrap
+        └─► Capacitor 8 래핑
                 ├─► iOS
                 └─► Android (AAB)
 ```
 
-Storage and platform features branch automatically at runtime: the web path uses `localStorage`, while native builds use Capacitor Preferences — so the app behaves correctly everywhere without forking the code.
+저장소와 플랫폼 기능은 런타임에 자동으로 분기됩니다. 웹은 `localStorage`, 네이티브는 Capacitor Preferences를 사용해 — 코드를 갈라내지 않고도 어느 환경에서나 올바르게 동작합니다.
 
-## Scale
+## 규모
 
-- **~3,168 LOC** in `src`
-- **4 screens**
-- **24+ inline SVG icons** and **8 mascot expressions**
-- **3 languages** (KO / EN / JA)
-- **1 developer** — design, build, native integration, and release
+- **약 3,168 LOC** (`src` 기준)
+- **화면 4개**
+- **인라인 SVG 아이콘 24종+**, **마스코트 표정 8종**
+- **3개국어** (KO / EN / JA)
+- **개발 인원 1명** — 기획·구현·네이티브 통합·릴리즈 전부
 
-## Technical Highlights
+## 기술 하이라이트
 
-- **True single-source, tri-platform delivery.** One codebase covers a live web deployment plus iOS and Android — with web/native runtime branching so nothing breaks on any platform.
-- **Three native integrations.** Local storage, PDF system sharing, and ads wired through Capacitor plugins.
-- **Serverless PDF generation.** Multi-page reports are built entirely client-side — no backend required.
-- **Offline-first, account-free.** No server, no login, no data collection — privacy by architecture.
-- **Automated release infrastructure.** Puppeteer-driven store screenshot generation and sharp-based icon generation, alongside trilingual i18n.
+- **진짜 단일 소스, 3플랫폼 배포** — 하나의 코드베이스로 실서비스 웹 + iOS + 안드로이드를 커버하고, 웹/네이티브 런타임 분기로 어느 플랫폼에서도 깨지지 않습니다.
+- **네이티브 통합 3종** — 로컬 저장, PDF 시스템 공유, 광고를 Capacitor 플러그인으로 연결.
+- **서버리스 PDF 생성** — 멀티페이지 리포트를 전부 클라이언트 사이드에서 생성, 백엔드가 필요 없습니다.
+- **오프라인 우선, 계정 없음** — 서버·로그인·데이터 수집 없이 아키텍처 자체가 프라이버시 친화적.
+- **릴리즈 자동화 인프라** — Puppeteer 기반 스토어 스크린샷 생성, sharp 기반 아이콘 생성, 3개국어 다국어까지.
 
-## My Role
+## 나의 역할
 
-Solo developer — end to end. I owned product direction, the React 19 + Vite 7 frontend, the Capacitor native wrapping for iOS and Android, all three native plugin integrations, the client-side PDF report engine, trilingual localization, and the release automation (screenshots, icons, web deploy, AAB build).
+기획부터 끝까지 1인 개발. 프로덕트 방향 설정, React 19 + Vite 7 프론트엔드, iOS·안드로이드 Capacitor 네이티브 래핑, 네이티브 플러그인 3종 통합, 클라이언트 사이드 PDF 리포트 엔진, 3개국어 지원, 릴리즈 자동화(스크린샷·아이콘·웹 배포·AAB 빌드)까지 전 영역을 직접 설계하고 구현했습니다.
