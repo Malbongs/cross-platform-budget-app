@@ -1,4 +1,4 @@
-# Gamified Budget Tracker
+# 크로스플랫폼 가계부 앱
 
 > Log a purchase, and a mascot reacts. A cross-platform gamification budget app built from a single codebase — Web, iOS, and Android.
 
